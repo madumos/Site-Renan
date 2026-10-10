@@ -1,31 +1,24 @@
 import { motion } from "motion/react";
-import { Youtube, Music, Radio } from "lucide-react";
+import { Youtube, Music } from "lucide-react";
 
 const videos = [
   {
-    id: "1",
-    title: "Nocturne in Blue - Live Performance",
-    thumbnail: "https://images.unsplash.com/photo-1511192336575-5a79af67a629?w=600&h=400&fit=crop",
-    duration: "4:32",
+    id: "n0ssdt-K2l8",
+    title: "Vídeo 1 do YouTube",
   },
   {
-    id: "2",
-    title: "Bossa Nova Medley",
-    thumbnail: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=600&h=400&fit=crop",
-    duration: "6:15",
+    id: "-zKBv3yUCW8",
+    title: "Vídeo 2 do YouTube",
   },
   {
-    id: "3",
-    title: "Choro Improvisation",
-    thumbnail: "https://images.unsplash.com/photo-1483412033650-1015ddeb83d1?w=600&h=400&fit=crop",
-    duration: "3:48",
+    id: "4MD2dGfC7Ig",
+    title: "Vídeo 3 do YouTube",
   },
 ];
 
 const streamingPlatforms = [
-  { name: "Spotify", icon: Music, color: "#1DB954", url: "#" },
-  { name: "SoundCloud", icon: Radio, color: "#FF7700", url: "#" },
-  { name: "YouTube", icon: Youtube, color: "#FF0000", url: "#" },
+  { name: "Spotify", icon: Music, color: "#1DB954", url: "https://open.spotify.com/intl-pt/artist/2PXz3LMrL9Wo5YPHQ0Pq47?si=B_KMa4NYQeuDjcEFts78ng" },
+  { name: "YouTube", icon: Youtube, color: "#FF0000", url: "https://www.youtube.com/@renanfrancioni652" },
 ];
 
 export function MediaSection() {
@@ -45,54 +38,58 @@ export function MediaSection() {
 
         {/* Video Gallery */}
         <motion.div
-          className="mb-20"
+          className="mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <h3 className="text-2xl mb-8 flex items-center gap-3" style={{ fontFamily: "var(--font-serif)" }}>
-            <Youtube className="w-7 h-7 text-[#FF0000]" />
-            Vídeos Recentes
-          </h3>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
             {videos.map((video, index) => (
               <motion.div
                 key={video.id}
-                className="group cursor-pointer"
+                className="group"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
                 whileHover={{ y: -8 }}
               >
-                <div className="relative aspect-video overflow-hidden rounded-lg mb-4">
-                  <img
-                    src={video.thumbnail}
-                    alt={video.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                <div className="aspect-video overflow-hidden rounded-lg">
+                  <iframe
+                    src={`https://www.youtube-nocookie.com/embed/${video.id}`}
+                    title={video.title}
+                    className="w-full h-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                    loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors" />
-
-                  {/* Play button */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-16 h-16 rounded-full bg-white/90 group-hover:bg-[#FF0000] flex items-center justify-center transition-all duration-300">
-                      <div className="w-0 h-0 border-l-[16px] border-l-black group-hover:border-l-white border-y-[10px] border-y-transparent ml-1 transition-colors" />
-                    </div>
-                  </div>
-
-                  {/* Duration */}
-                  <div className="absolute bottom-3 right-3 bg-black/80 px-2 py-1 rounded text-xs" style={{ fontFamily: "var(--font-sans)" }}>
-                    {video.duration}
-                  </div>
                 </div>
-                <h4 className="text-lg group-hover:text-[#3a5a7a] transition-colors" style={{ fontFamily: "var(--font-serif)" }}>
-                  {video.title}
-                </h4>
               </motion.div>
             ))}
           </div>
+        </motion.div>
+
+        {/* Spotify Embed */}
+        <motion.div
+          className="mb-20 max-w-4xl mx-auto"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <iframe
+            data-testid="embed-iframe"
+            style={{ borderRadius: "12px", border: 0 }}
+            src="https://open.spotify.com/embed/artist/2PXz3LMrL9Wo5YPHQ0Pq47?utm_source=generator&theme=0&si=b740c679746d47d9"
+            width="100%"
+            height="630"
+            allowFullScreen
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+          />
         </motion.div>
 
         {/* Streaming Platforms */}

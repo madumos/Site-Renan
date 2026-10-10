@@ -109,25 +109,6 @@ export function ScheduleSection() {
             </motion.div>
           ))}
         </div>
-
-        {/* CTA */}
-        <motion.div
-          className="mt-16 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <p className="text-[#9ca3af] mb-6">Acompanhe as próximas apresentações</p>
-          <motion.button
-            className="px-8 py-3 bg-[#1a3d5c] hover:bg-[#2a4a6a] rounded-full transition-colors"
-            style={{ fontFamily: "var(--font-sans)" }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Ver calendário completo
-          </motion.button>
-        </motion.div>
       </div>
     </section>
   );

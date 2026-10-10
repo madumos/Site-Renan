@@ -83,18 +83,7 @@ export function HeroSection() {
               </p>
             </motion.div>
 
-            <motion.div
-              className="flex gap-6 justify-center md:justify-start items-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1, duration: 0.8 }}
-            >
-              <div className="h-[1px] w-16 bg-gradient-to-r from-transparent via-[#3a5a7a] to-transparent" />
-              <span className="text-xs tracking-[0.4em] text-[#3a5a7a] uppercase" style={{ fontFamily: "var(--font-sans)" }}>
-                Explore
-              </span>
-              <div className="h-[1px] w-16 bg-gradient-to-r from-transparent via-[#3a5a7a] to-transparent" />
-            </motion.div>
+
           </motion.div>
         </div>
       </div>
