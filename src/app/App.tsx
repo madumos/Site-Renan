@@ -30,10 +30,10 @@ export default function App() {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-[#0a0e1a] text-[#f5f5f0]">
+    <div className="relative min-h-screen bg-[#0a0e1a] text-[#f5f5f0] overflow-x-hidden">
       <PianoNavigation />
 
-      <main className="ml-60">
+      <main className="md:ml-64">
         <HeroSection />
         <AboutSection />
         <PortfolioSection />

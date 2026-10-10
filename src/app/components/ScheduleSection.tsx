@@ -38,7 +38,7 @@ const events = [
 
 export function ScheduleSection() {
   return (
-    <section id="agenda" className="min-h-screen py-32 px-8 md:px-16 relative bg-[#0f1419]">
+    <section id="agenda" className="min-h-screen py-12 px-4 md:py-32 md:px-16 relative bg-[#0f1419]">
       <div className="max-w-6xl mx-auto">
         <motion.h2
           className="text-5xl md:text-7xl mb-20 text-center"
@@ -61,20 +61,20 @@ export function ScheduleSection() {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
             >
-              <div className="flex gap-6 p-6 bg-[#141824] border border-white/10 rounded-lg hover:border-[#1a3d5c] transition-all duration-300 cursor-pointer group-hover:translate-x-2">
+              <div className="flex flex-col md:flex-row gap-6 p-6 bg-[#141824] border border-white/10 rounded-lg hover:border-[#1a3d5c] transition-all duration-300 cursor-pointer group-hover:translate-x-2">
                 {/* Date */}
-                <div className="flex-shrink-0 w-24 text-center">
-                  <div className="text-3xl mb-1" style={{ fontFamily: "var(--font-serif)" }}>
+                <div className="flex-shrink-0 md:w-24 text-left md:text-center">
+                  <div className="text-3xl mb-1 inline-block md:block mr-2 md:mr-0" style={{ fontFamily: "var(--font-serif)" }}>
                     {event.date.split(" ")[0]}
                   </div>
-                  <div className="text-sm text-[#9ca3af] uppercase tracking-wider" style={{ fontFamily: "var(--font-sans)" }}>
+                  <div className="text-sm text-[#9ca3af] uppercase tracking-wider inline-block md:block mr-2 md:mr-0" style={{ fontFamily: "var(--font-sans)" }}>
                     {event.date.split(" ")[1]}
                   </div>
-                  <div className="text-xs text-[#9ca3af]/60 mt-1">{event.year}</div>
+                  <div className="text-xs text-[#9ca3af]/60 mt-1 inline-block md:block">{event.year}</div>
                 </div>
 
                 {/* Divider */}
-                <div className="w-px bg-white/10" />
+                <div className="h-px w-full md:w-px md:h-auto bg-white/10" />
 
                 {/* Event details */}
                 <div className="flex-1">
@@ -98,7 +98,7 @@ export function ScheduleSection() {
                 </div>
 
                 {/* Arrow */}
-                <div className="flex-shrink-0 flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="flex-shrink-0 hidden md:flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
                   <div className="w-8 h-8 rounded-full border border-[#1a3d5c] flex items-center justify-center">
                     <svg className="w-4 h-4 text-[#3a5a7a]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

@@ -3,7 +3,7 @@ import { ImageWithFallback } from "./figma/ImageWithFallback";
 
 export function AboutSection() {
   return (
-    <section id="sobre" className="min-h-screen py-32 px-8 md:px-16 relative">
+    <section id="sobre" className="min-h-screen py-12 px-4 md:py-32 md:px-16 relative">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -15,7 +15,7 @@ export function AboutSection() {
             Sobre
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
             {/* Image */}
             <motion.div
               className="relative"

@@ -26,7 +26,7 @@ const testimonials = [
 
 export function TestimonialsSection() {
   return (
-    <section id="depoimentos" className="min-h-screen py-32 px-8 md:px-16 relative">
+    <section id="depoimentos" className="min-h-screen py-12 px-4 md:py-32 md:px-16 relative">
       <div className="max-w-7xl mx-auto">
         <motion.h2
           className="text-5xl md:text-7xl mb-20 text-center"
@@ -39,7 +39,7 @@ export function TestimonialsSection() {
           Depoimentos
         </motion.h2>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={index}

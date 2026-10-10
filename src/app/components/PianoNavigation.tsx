@@ -32,7 +32,7 @@ export function PianoNavigation() {
   };
 
   return (
-    <nav className="fixed left-0 top-0 h-screen w-64 flex flex-col z-50">
+    <nav className="hidden md:flex fixed left-0 top-0 h-screen w-64 flex-col z-50">
       {/* Piano container com borda externa ocupando 100% da altura (h-full) */}
       <div
         className="flex flex-col w-full h-full relative"

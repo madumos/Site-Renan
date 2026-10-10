@@ -23,7 +23,7 @@ const streamingPlatforms = [
 
 export function MediaSection() {
   return (
-    <section id="midia" className="min-h-screen py-32 px-8 md:px-16 relative">
+    <section id="midia" className="min-h-screen py-12 px-4 md:py-32 md:px-16 relative">
       <div className="max-w-7xl mx-auto">
         <motion.h2
           className="text-5xl md:text-7xl mb-20 text-center"
@@ -45,7 +45,7 @@ export function MediaSection() {
           transition={{ duration: 0.8 }}
         >
 
-          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
             {videos.map((video, index) => (
               <motion.div
                 key={video.id}
@@ -103,7 +103,7 @@ export function MediaSection() {
             Ouça nas Plataformas
           </h3>
 
-          <div className="flex flex-wrap justify-center gap-6">
+          <div className="flex flex-col md:flex-row flex-wrap justify-center gap-4 md:gap-6">
             {streamingPlatforms.map((platform, index) => (
               <motion.a
                 key={platform.name}

@@ -48,7 +48,7 @@ const sidemanProjects = [
 
 export function PortfolioSection() {
   return (
-    <section id="portfolio" className="min-h-screen py-32 px-8 md:px-16 relative bg-[#0f1419]">
+    <section id="portfolio" className="min-h-screen py-12 px-4 md:py-32 md:px-16 relative bg-[#0f1419]">
       <div className="max-w-7xl mx-auto">
         <motion.h2
           className="text-5xl md:text-7xl mb-20 text-center"
@@ -61,7 +61,7 @@ export function PortfolioSection() {
           Portfólio
         </motion.h2>
 
-        <div className="grid md:grid-cols-2 gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
           {/* Solo Projects */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}

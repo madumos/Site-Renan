@@ -15,7 +15,7 @@ export function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 px-8 max-w-7xl w-full">
+      <div className="relative z-10 px-4 md:px-8 max-w-7xl w-full">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Left: Artist Photo */}
           <motion.div
