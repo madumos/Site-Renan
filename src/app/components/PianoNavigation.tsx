@@ -15,8 +15,8 @@ const pianoKeys: PianoKey[] = [
   { id: "sobre", label: "Sobre", section: "sobre", hasBlackKeyBelow: true },
   { id: "portfolio", label: "Portfólio", section: "portfolio", hasBlackKeyBelow: true },
   { id: "midia", label: "Mídia", section: "midia", hasBlackKeyBelow: false },
-  { id: "depoimentos", label: "Depoimentos", section: "depoimentos", hasBlackKeyBelow: true },
   { id: "agenda", label: "Agenda", section: "agenda", hasBlackKeyBelow: true },
+  { id: "depoimentos", label: "Depoimentos", section: "depoimentos", hasBlackKeyBelow: true },
   { id: "contato", label: "Contato", section: "contato", hasBlackKeyBelow: false },
 ];
 
@@ -74,11 +74,10 @@ export function PianoNavigation() {
 
               {/* Label */}
               <span
-                className={`absolute inset-0 flex items-center justify-center pr-4 transition-all duration-300 ${
-                  activeKey === key.id
+                className={`absolute inset-0 flex items-center justify-center pr-4 transition-all duration-300 ${activeKey === key.id
                     ? "text-[#1a3d5c]"
                     : "text-[#4a4a48] group-hover:text-[#2a2a28]"
-                }`}
+                  }`}
                 style={{
                   fontFamily: "var(--font-serif)",
                   fontSize: "19px",

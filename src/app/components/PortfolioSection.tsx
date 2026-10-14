@@ -71,6 +71,7 @@ export function PortfolioSection() {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
             >
+              {/* Mantido o 'group-hover:translate-x-2' para continuar deslizando ao passar o mouse */}
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 p-6 bg-[#141824] border border-white/10 rounded-lg hover:border-[#1a3d5c] transition-all duration-300 cursor-pointer group-hover:translate-x-2">
                 {/* Lado Esquerdo: Artista + Gênero em destaque */}
                 <div className="flex-1 min-w-[280px]">
@@ -101,7 +102,7 @@ export function PortfolioSection() {
                   )}
                 </div>
 
-                {/* Lado Direito: Atuação / Função com ícone e seta interativa no hover */}
+                {/* Lado Direito: Atuação / Função com ícone */}
                 <div className="flex items-center justify-between md:justify-end gap-6 md:shrink-0 pt-3 md:pt-0 border-t border-white/5 md:border-t-0">
                   <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-md bg-white/[0.03] border border-white/5">
                     <Music2 className="w-4 h-4 text-[#3a5a7a] shrink-0" />
@@ -111,15 +112,6 @@ export function PortfolioSection() {
                     >
                       {project.role}
                     </span>
-                  </div>
-
-                  {/* Seta indicativa no hover para dar dinamismo */}
-                  <div className="hidden md:flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
-                    <div className="w-8 h-8 rounded-full border border-[#1a3d5c] flex items-center justify-center">
-                      <svg className="w-4 h-4 text-[#3a5a7a]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </div>
                   </div>
                 </div>
               </div>

@@ -65,6 +65,7 @@ export function ScheduleSection() {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
             >
+              {/* Mantido o 'group-hover:translate-x-2' para continuar deslizando ao passar o mouse */}
               <div className="flex flex-col md:flex-row gap-6 p-6 bg-[#141824] border border-white/10 rounded-lg hover:border-[#1a3d5c] transition-all duration-300 group-hover:translate-x-2">
                 {/* Date */}
                 <div className="flex-shrink-0 md:w-24 text-left md:text-center">
@@ -101,9 +102,9 @@ export function ScheduleSection() {
                   </div>
                 </div>
 
-                {/* Ticket button or arrow */}
+                {/* Ticket button (renderiza apenas se houver ticketUrl) */}
                 <div className="flex-shrink-0 flex items-center">
-                  {event.ticketUrl ? (
+                  {event.ticketUrl && (
                     <a
                       href={event.ticketUrl}
                       target="_blank"
@@ -115,14 +116,6 @@ export function ScheduleSection() {
                       <Ticket className="w-4 h-4" />
                       Ingressos
                     </a>
-                  ) : (
-                    <div className="hidden md:flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
-                      <div className="w-8 h-8 rounded-full border border-[#1a3d5c] flex items-center justify-center">
-                        <svg className="w-4 h-4 text-[#3a5a7a]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </div>
-                    </div>
                   )}
                 </div>
               </div>
