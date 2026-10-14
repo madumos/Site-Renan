@@ -27,7 +27,7 @@ const testimonials = [
 export function TestimonialsSection() {
   return (
     <section id="depoimentos" className="min-h-screen py-12 px-4 md:py-32 md:px-16 relative">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <motion.h2
           className="text-5xl md:text-7xl mb-20 text-center"
           style={{ fontFamily: "var(--font-serif)" }}

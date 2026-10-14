@@ -1,10 +1,11 @@
 import { motion } from "motion/react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import aboutImage from "./images/about.jpg";
 
 export function AboutSection() {
   return (
     <section id="sobre" className="min-h-screen py-12 px-4 md:py-32 md:px-16 relative">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -26,7 +27,7 @@ export function AboutSection() {
             >
               <div className="relative aspect-[3/4] overflow-hidden rounded-lg">
                 <ImageWithFallback
-                  src="https://images.unsplash.com/photo-1552422530-9b41dc72286b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800"
+                  src={aboutImage}
                   alt="Renan Francioni ao piano"
                   className="w-full h-full object-cover"
                 />
@@ -44,28 +45,26 @@ export function AboutSection() {
               transition={{ duration: 0.8, delay: 0.4 }}
             >
               <p className="text-lg text-[#f5f5f0]/80 leading-relaxed">
-                Renan Francioni é um pianista brasileiro com formação erudita e profunda paixão pelo Jazz,
-                Bossa Nova e MPB. Sua trajetória musical é marcada pela versatilidade e pela busca constante
-                de novas sonoridades.
+                Pianista, arranjador e compositor. Bacharel em Piano pela Escola de Música da UFRJ, acompanhou artistas como Jane Duboc, Cláudio Lins, Cris Delanno e Yumi Park.
               </p>
               <p className="text-lg text-[#f5f5f0]/80 leading-relaxed">
-                Formado em Piano Erudito pelo Conservatório Dramático e Musical de São Paulo, Renan
-                desenvolveu uma linguagem única que transita entre o clássico e o popular, sempre com
-                refinamento técnico e sensibilidade artística.
+                Trabalhou com instrumentistas como Maurício Einhorn, Victor Biglione, Leo Amuedo, Sérgio Barroso, Téo Lima, Márcio Bahia e Itiberê Zwarg, e realizou gravações com nomes como Roberto Menescal e Theo Bial. Em 2023, seu nome passou a fazer parte, como verbete, do Dicionário Cravo Albin da MPB.
               </p>
               <p className="text-lg text-[#f5f5f0]/80 leading-relaxed">
-                Com mais de uma década de experiência, atua tanto em projetos autorais quanto como sideman,
-                tendo acompanhado diversos artistas da cena musical brasileira em estúdios e palcos pelo país.
+                Já se apresentou em festivais de jazz nacionais, como o Festival Internacional de Jazz de Macaé (RJ), e internacionais, como o Festival Internacional Tucumán Jazz e o Festival Internacional de Jazz de Buenos Aires, ambos na Argentina.
+              </p>
+              <p className="text-lg text-[#f5f5f0]/80 leading-relaxed">
+                É co-produtor e pianista dos álbuns "AC Jazz: Piazzolla Songbook" e “AC Jazz: The Music of Egberto Gismonti” e diretor musical, arranjador, produtor e pianista do álbum “(des)Construção”.
               </p>
 
               {/* Stats */}
               <div className="grid grid-cols-3 gap-6 pt-8 border-t border-white/10">
                 <div>
-                  <div className="text-3xl mb-2" style={{ fontFamily: "var(--font-serif)" }}>10+</div>
+                  <div className="text-3xl mb-2" style={{ fontFamily: "var(--font-serif)" }}>20+</div>
                   <div className="text-sm text-[#9ca3af] tracking-wide" style={{ fontFamily: "var(--font-sans)" }}>Anos de experiência</div>
                 </div>
                 <div>
-                  <div className="text-3xl mb-2" style={{ fontFamily: "var(--font-serif)" }}>50+</div>
+                  <div className="text-3xl mb-2" style={{ fontFamily: "var(--font-serif)" }}>150+</div>
                   <div className="text-sm text-[#9ca3af] tracking-wide" style={{ fontFamily: "var(--font-sans)" }}>Apresentações</div>
                 </div>
                 <div>

@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Calendar, MapPin, Clock } from "lucide-react";
+import { Calendar, MapPin, Clock, Ticket } from "lucide-react";
 
 const events = [
   {
@@ -9,6 +9,7 @@ const events = [
     location: "São Paulo, SP",
     time: "21h00",
     type: "Solo",
+    ticketUrl: "https://bluenoterio.com.br/",
   },
   {
     date: "05 Jun",
@@ -17,6 +18,7 @@ const events = [
     location: "Santos, SP",
     time: "19h30",
     type: "Trio",
+    ticketUrl: null,
   },
   {
     date: "15 Jun",
@@ -25,6 +27,7 @@ const events = [
     location: "São Paulo, SP",
     time: "20h00",
     type: "Solo",
+    ticketUrl: null,
   },
   {
     date: "22 Jun",
@@ -33,6 +36,7 @@ const events = [
     location: "São Paulo, SP",
     time: "21h30",
     type: "Quintet",
+    ticketUrl: null,
   },
 ];
 
@@ -61,7 +65,7 @@ export function ScheduleSection() {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
             >
-              <div className="flex flex-col md:flex-row gap-6 p-6 bg-[#141824] border border-white/10 rounded-lg hover:border-[#1a3d5c] transition-all duration-300 cursor-pointer group-hover:translate-x-2">
+              <div className="flex flex-col md:flex-row gap-6 p-6 bg-[#141824] border border-white/10 rounded-lg hover:border-[#1a3d5c] transition-all duration-300 group-hover:translate-x-2">
                 {/* Date */}
                 <div className="flex-shrink-0 md:w-24 text-left md:text-center">
                   <div className="text-3xl mb-1 inline-block md:block mr-2 md:mr-0" style={{ fontFamily: "var(--font-serif)" }}>
@@ -97,13 +101,29 @@ export function ScheduleSection() {
                   </div>
                 </div>
 
-                {/* Arrow */}
-                <div className="flex-shrink-0 hidden md:flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="w-8 h-8 rounded-full border border-[#1a3d5c] flex items-center justify-center">
-                    <svg className="w-4 h-4 text-[#3a5a7a]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </div>
+                {/* Ticket button or arrow */}
+                <div className="flex-shrink-0 flex items-center">
+                  {event.ticketUrl ? (
+                    <a
+                      href={event.ticketUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="flex items-center gap-2 px-4 py-2 bg-[#1a3d5c] hover:bg-[#2a5a8c] text-white text-sm rounded-full transition-all duration-300 hover:scale-105"
+                      style={{ fontFamily: "var(--font-sans)" }}
+                    >
+                      <Ticket className="w-4 h-4" />
+                      Ingressos
+                    </a>
+                  ) : (
+                    <div className="hidden md:flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="w-8 h-8 rounded-full border border-[#1a3d5c] flex items-center justify-center">
+                        <svg className="w-4 h-4 text-[#3a5a7a]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.div>

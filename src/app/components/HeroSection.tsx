@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import heroImage from "./images/hero.jpg";
 
 export function HeroSection() {
   return (
@@ -29,7 +30,7 @@ export function HeroSection() {
               <div className="absolute inset-0 border-4 border-[#1a3d5c] rounded-lg -rotate-2 z-0" />
               <div className="relative overflow-hidden rounded-lg shadow-2xl rotate-1">
                 <ImageWithFallback
-                  src="https://images.unsplash.com/photo-1513883049090-d0b7439799bf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800"
+                  src={heroImage}
                   alt="Renan Francioni"
                   className="w-full h-full object-cover"
                 />
@@ -82,8 +83,6 @@ export function HeroSection() {
                 Jazz Instrumental · Bossa Nova · MPB
               </p>
             </motion.div>
-
-
           </motion.div>
         </div>
       </div>

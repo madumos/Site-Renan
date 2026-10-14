@@ -7,11 +7,11 @@ const videos = [
     title: "Vídeo 1 do YouTube",
   },
   {
-    id: "-zKBv3yUCW8",
+    id: "zYY_GDcYuMw",
     title: "Vídeo 2 do YouTube",
   },
   {
-    id: "4MD2dGfC7Ig",
+    id: "yT4WC_mBd5I",
     title: "Vídeo 3 do YouTube",
   },
 ];
@@ -24,7 +24,7 @@ const streamingPlatforms = [
 export function MediaSection() {
   return (
     <section id="midia" className="min-h-screen py-12 px-4 md:py-32 md:px-16 relative">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <motion.h2
           className="text-5xl md:text-7xl mb-20 text-center"
           style={{ fontFamily: "var(--font-serif)" }}
@@ -58,7 +58,7 @@ export function MediaSection() {
               >
                 <div className="aspect-video overflow-hidden rounded-lg">
                   <iframe
-                    src={`https://www.youtube-nocookie.com/embed/${video.id}`}
+                    src={`https://www.youtube.com/embed/${video.id}`}
                     title={video.title}
                     className="w-full h-full"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -74,7 +74,7 @@ export function MediaSection() {
 
         {/* Spotify Embed */}
         <motion.div
-          className="mb-20 max-w-4xl mx-auto"
+          className="mb-32 max-w-6xl mx-auto"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -83,9 +83,9 @@ export function MediaSection() {
           <iframe
             data-testid="embed-iframe"
             style={{ borderRadius: "12px", border: 0 }}
-            src="https://open.spotify.com/embed/artist/2PXz3LMrL9Wo5YPHQ0Pq47?utm_source=generator&theme=0&si=b740c679746d47d9"
+            src="https://open.spotify.com/embed/playlist/0N9t5juez4oNQDYl4MdR7H?utm_source=generator&si=3cc643aae57a49b5"
             width="100%"
-            height="630"
+            height="520"
             allowFullScreen
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
             loading="lazy"
