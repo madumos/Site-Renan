@@ -56,22 +56,6 @@ export function AboutSection() {
               <p className="text-lg text-[#f5f5f0]/80 leading-relaxed">
                 É co-produtor e pianista dos álbuns "AC Jazz: Piazzolla Songbook" e “AC Jazz: The Music of Egberto Gismonti” e diretor musical, arranjador, produtor e pianista do álbum “(des)Construção”.
               </p>
-
-              {/* Stats */}
-              <div className="grid grid-cols-3 gap-6 pt-8 border-t border-white/10">
-                <div>
-                  <div className="text-3xl mb-2" style={{ fontFamily: "var(--font-serif)" }}>20+</div>
-                  <div className="text-sm text-[#9ca3af] tracking-wide" style={{ fontFamily: "var(--font-sans)" }}>Anos de experiência</div>
-                </div>
-                <div>
-                  <div className="text-3xl mb-2" style={{ fontFamily: "var(--font-serif)" }}>150+</div>
-                  <div className="text-sm text-[#9ca3af] tracking-wide" style={{ fontFamily: "var(--font-sans)" }}>Apresentações</div>
-                </div>
-                <div>
-                  <div className="text-3xl mb-2" style={{ fontFamily: "var(--font-serif)" }}>3</div>
-                  <div className="text-sm text-[#9ca3af] tracking-wide" style={{ fontFamily: "var(--font-sans)" }}>Álbuns gravados</div>
-                </div>
-              </div>
             </motion.div>
           </div>
         </motion.div>

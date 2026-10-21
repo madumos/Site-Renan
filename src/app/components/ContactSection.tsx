@@ -7,6 +7,7 @@ export function ContactSection() {
     name: "",
     email: "",
     phone: "",
+    eventDate: "",
     eventType: "",
     eventDetails: "",
     message: "",
@@ -20,7 +21,7 @@ export function ContactSection() {
     setSubmitMessage("");
 
     try {
-      const response = await fetch("https://formspree.io/f/maeqjbjk", {
+      const response = await fetch("https://formspree.io/f/xvkzndqn", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -34,7 +35,7 @@ export function ContactSection() {
       }
 
       setSubmitMessage("Mensagem enviada com sucesso. Obrigado pelo contato!");
-      setFormData({ name: "", email: "", phone: "", eventType: "", eventDetails: "", message: "" });
+      setFormData({ name: "", email: "", phone: "", eventDate: "", eventType: "", eventDetails: "", message: "" });
     } catch {
       setSubmitMessage("Não foi possível enviar sua mensagem. Tente novamente.");
     } finally {
@@ -89,7 +90,7 @@ export function ContactSection() {
                 </div>
                 <div>
                   <div className="text-sm text-[#9ca3af] mb-1">Email</div>
-                  <div className="text-lg">contato@renanfrancioni.com</div>
+                  <div className="text-lg">renanfrancioni@gmail.com</div>
                 </div>
               </div>
 
@@ -165,6 +166,21 @@ export function ContactSection() {
                   value={formData.phone}
                   onChange={handleChange}
                   autoComplete="tel"
+                  className="w-full px-4 py-3 bg-[#141824] border border-white/10 rounded-lg focus:border-[#1a3d5c] focus:outline-none transition-colors"
+                  required
+                />
+              </div>
+
+              <div>
+                <label htmlFor="eventDate" className="block text-sm mb-2 text-[#9ca3af]">
+                  Data Desejada
+                </label>
+                <input
+                  type="date"
+                  id="eventDate"
+                  name="eventDate"
+                  value={formData.eventDate}
+                  onChange={handleChange}
                   className="w-full px-4 py-3 bg-[#141824] border border-white/10 rounded-lg focus:border-[#1a3d5c] focus:outline-none transition-colors"
                   required
                 />

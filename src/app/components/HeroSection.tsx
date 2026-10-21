@@ -45,7 +45,7 @@ export function HeroSection() {
 
           {/* Right: Name and Title */}
           <motion.div
-            className="text-center md:text-left order-1 md:order-2"
+            className="text-center md:text-left order-1 md:order-2 mt-24 md:mt-0"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}

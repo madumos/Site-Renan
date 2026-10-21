@@ -4,7 +4,7 @@ import { Quote } from "lucide-react";
 const testimonials = [
   {
     text: "Renan tem uma sensibilidade musical única. Sua capacidade de improvisar e criar atmosferas emocionantes ao piano é impressionante. Foi uma honra tê-lo no meu álbum.",
-    author: "Maria Silva",
+    author: "Yumi Park",
     role: "Cantora e Compositora",
   },
   {
@@ -14,12 +14,12 @@ const testimonials = [
   },
   {
     text: "Profissionalismo e talento em igual medida. Renan sempre eleva o nível de qualquer projeto musical que participa.",
-    author: "Ana Rodrigues",
-    role: "Produtora Musical",
+    author: "Maurício Einhorn",
+    role: "Produtor Musical",
   },
   {
     text: "A musicalidade do Renan transcende gêneros. Ele entende profundamente a linguagem do jazz brasileiro e sabe como dialogar com diferentes estilos.",
-    author: "Pedro Almeida",
+    author: "Victor Biglione",
     role: "Contrabaixista",
   },
 ];
