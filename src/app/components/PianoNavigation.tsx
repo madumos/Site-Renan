@@ -8,20 +8,41 @@ interface PianoKey {
   hasBlackKeyBelow?: boolean;
 }
 
-// Piano vertical literal - padrão da imagem de referência
-// Teclas pretas ficam ENTRE as teclas brancas (sobrepostas)
-const pianoKeys: PianoKey[] = [
-  { id: "home", label: "Home", section: "home", hasBlackKeyBelow: true },
-  { id: "sobre", label: "Sobre", section: "sobre", hasBlackKeyBelow: true },
-  { id: "portfolio", label: "Portfólio", section: "portfolio", hasBlackKeyBelow: true },
-  { id: "midia", label: "Mídia", section: "midia", hasBlackKeyBelow: false },
-  { id: "agenda", label: "Agenda", section: "agenda", hasBlackKeyBelow: true },
-  { id: "depoimentos", label: "Depoimentos", section: "depoimentos", hasBlackKeyBelow: true },
-  { id: "contato", label: "Contato", section: "contato", hasBlackKeyBelow: false },
+// Teclas base (sem "Depoimentos" — ela é adicionada dinamicamente via prop)
+const BASE_PIANO_KEYS: PianoKey[] = [
+  { id: "home",      label: "Home",      section: "home",      hasBlackKeyBelow: true  },
+  { id: "sobre",     label: "Sobre",     section: "sobre",     hasBlackKeyBelow: true  },
+  { id: "portfolio", label: "Portfólio", section: "portfolio",  hasBlackKeyBelow: true  },
+  { id: "midia",     label: "Mídia",     section: "midia",     hasBlackKeyBelow: false },
+  { id: "agenda",    label: "Agenda",    section: "agenda",    hasBlackKeyBelow: true  },
+  // "depoimentos" inserido condicionalmente via prop showTestimonials
+  { id: "contato",   label: "Contato",   section: "contato",   hasBlackKeyBelow: false },
 ];
 
-export function PianoNavigation() {
+const TESTIMONIAL_KEY: PianoKey = {
+  id: "depoimentos",
+  label: "Depoimentos",
+  section: "depoimentos",
+  hasBlackKeyBelow: true,
+};
+
+interface PianoNavigationProps {
+  /** Controla se a tecla "Depoimentos" aparece no menu.
+   *  Passe `true` quando o CSV tiver dados, `false` quando estiver vazio. */
+  showTestimonials: boolean;
+}
+
+export function PianoNavigation({ showTestimonials }: PianoNavigationProps) {
   const [activeKey, setActiveKey] = useState("home");
+
+  // Monta a lista de teclas dinamicamente
+  const pianoKeys: PianoKey[] = showTestimonials
+    ? [
+        ...BASE_PIANO_KEYS.slice(0, 5), // home → agenda
+        TESTIMONIAL_KEY,
+        BASE_PIANO_KEYS[5],              // contato
+      ]
+    : BASE_PIANO_KEYS;
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -47,7 +68,6 @@ export function PianoNavigation() {
             {/* Tecla Branca (clicável) */}
             <motion.button
               onClick={() => scrollToSection(key.section)}
-              // Removido o h-20 e adicionado flex-1 e h-full
               className="w-full flex-1 h-full relative group overflow-hidden"
               style={{
                 background: activeKey === key.id
@@ -74,10 +94,11 @@ export function PianoNavigation() {
 
               {/* Label */}
               <span
-                className={`absolute inset-0 flex items-center justify-center pr-4 transition-all duration-300 ${activeKey === key.id
+                className={`absolute inset-0 flex items-center justify-center pr-4 transition-all duration-300 ${
+                  activeKey === key.id
                     ? "text-[#1a3d5c]"
                     : "text-[#4a4a48] group-hover:text-[#2a2a28]"
-                  }`}
+                }`}
                 style={{
                   fontFamily: "var(--font-serif)",
                   fontSize: "19px",
@@ -106,7 +127,6 @@ export function PianoNavigation() {
             {/* Tecla Preta (sobreposta ENTRE as teclas brancas) */}
             {key.hasBlackKeyBelow && (
               <motion.div
-                // w-[35%] e h-12 reduzem o tamanho da tecla preta
                 className="absolute left-0 bottom-0 translate-y-1/2 w-[35%] h-12 pointer-events-none z-10"
                 style={{
                   background: "linear-gradient(to right, #0a0a0a 0%, #1a1a1a 70%, #2a2a2a 100%)",
