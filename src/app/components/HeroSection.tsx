@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import heroImage from "./images/hero.jpg";
+import heroImage from "./images/hero02.png";
 
 export function HeroSection() {
   return (

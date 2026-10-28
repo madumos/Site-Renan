@@ -4,11 +4,7 @@ import aboutImage from "./images/about.jpg";
 import { useCsvData } from "../../hooks/useCsvData";
 import { CSV_URLS } from "../../config/csvUrls";
 
-// ============================================================
-// INTERFACE — Deve refletir exatamente as colunas da aba "Sobre"
-// Coluna esperada na planilha:
-//   biography | Texto completo (pode ter múltiplos parágrafos separados por \n)
-// ============================================================
+
 interface SobraRow {
   biography: string;
 }
@@ -29,13 +25,10 @@ function BiographySkeleton() {
 }
 
 export function AboutSection() {
-  // ============================================================
-  // BUSCA DOS DADOS DO CSV
-  // Configure a URL em src/config/csvUrls.ts → CSV_URLS.SOBRE
-  // ============================================================
+
   const { data, loading, error } = useCsvData<SobraRow>(
     CSV_URLS.SOBRE,
-    // Validação: mantém apenas linhas com biography não vazia
+
     (row) => typeof row.biography === "string" && row.biography.trim() !== ""
   );
 
@@ -62,7 +55,7 @@ export function AboutSection() {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
-            {/* Imagem — permanece estática/local */}
+            {/* Imagem */}
             <motion.div
               className="relative"
               initial={{ opacity: 0, x: -50 }}
@@ -81,7 +74,7 @@ export function AboutSection() {
               <div className="absolute -bottom-6 -right-6 w-32 h-32 border-2 border-[#1a3d5c] rounded-lg -z-10" />
             </motion.div>
 
-            {/* Biografia — carregada dinamicamente do CSV */}
+            {/* Biografia*/}
             <motion.div
               className="space-y-6"
               initial={{ opacity: 0, x: 50 }}
