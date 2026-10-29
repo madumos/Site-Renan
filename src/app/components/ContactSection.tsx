@@ -270,14 +270,7 @@ export function ContactSection() {
           </p>
 
           <p style={{ fontFamily: "var(--font-sans)" }} className="text-[#6b7280]">
-            Design &amp; Desenvolvimento por{" "}
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#9ca3af] hover:text-white transition-colors duration-200 underline-offset-4 hover:underline"
-            >
-              Madumos Estúdio
-            </a>
+            Design &amp; Desenvolvimento por Madumos Estúdio
           </p>
         </motion.div>
       </div >

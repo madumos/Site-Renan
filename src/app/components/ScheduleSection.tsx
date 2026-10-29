@@ -102,12 +102,12 @@ export function ScheduleSection({ events, loading, error }: ScheduleSectionProps
 
                   {/* Detalhes do evento*/}
                   <div className="flex-1">
-                    <h4
+                    <h3
                       className="text-2xl mb-3 group-hover:text-[#3a5a7a] transition-colors"
                       style={{ fontFamily: "var(--font-serif)" }}
                     >
                       {event.title}
-                    </h4>
+                    </h3>
                     <div className="flex flex-wrap gap-6 text-sm text-[#9ca3af]">
                       {/* Localização*/}
                       <div className="flex items-center gap-2">

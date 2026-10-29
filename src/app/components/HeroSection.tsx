@@ -45,6 +45,7 @@ export function HeroSection() {
           </motion.div>
 
           {/* Nome e Subtítulo*/}
+
           <motion.div
             className="text-center md:text-left order-1 md:order-2 mt-24 md:mt-0"
             initial={{ opacity: 0, y: 30 }}

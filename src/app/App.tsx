@@ -1,22 +1,24 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { PianoNavigation } from "./components/PianoNavigation";
 import { HeroSection } from "./components/HeroSection";
 import { AboutSection } from "./components/AboutSection";
 import { PortfolioSection } from "./components/PortfolioSection";
 import { MediaSection } from "./components/MediaSection";
-import {
-  ScheduleSection,
-  type AgendaRow,
-} from "./components/ScheduleSection";
-import {
-  TestimonialsSection,
-  useCsvData,
-  CSV_URLS,
-  type DepoimentoRow,
-} from "./components/TestimonialsSection";
+import { ScheduleSection, type AgendaRow, } from "./components/ScheduleSection";
+import { TestimonialsSection, useCsvData, CSV_URLS, type DepoimentoRow } from "./components/TestimonialsSection";
 import { ContactSection } from "./components/ContactSection";
 
 export default function App() {
+  const [cachedSchedule] = useState<boolean | null>(() => {
+    const item = localStorage.getItem("rf_has_schedule");
+    return item !== null ? item === "true" : null;
+  });
+
+  const [cachedTestimonials] = useState<boolean | null>(() => {
+    const item = localStorage.getItem("rf_has_testimonials");
+    return item !== null ? item === "true" : null;
+  });
+
   const {
     data: scheduleEvents,
     loading: scheduleLoading,
@@ -34,8 +36,6 @@ export default function App() {
       );
     }
   );
-
-  const showSchedule = !scheduleLoading && Boolean(scheduleEvents && scheduleEvents.length > 0);
 
   const {
     data: testimonials,
@@ -55,10 +55,34 @@ export default function App() {
     }
   );
 
-  const showTestimonials = !testimonialsLoading && Boolean(testimonials && testimonials.length > 0);
-  const isLoading = scheduleLoading || testimonialsLoading;
+  useEffect(() => {
+    if (!scheduleLoading && scheduleEvents) {
+      localStorage.setItem("rf_has_schedule", String(scheduleEvents.length > 0));
+    }
+  }, [scheduleLoading, scheduleEvents]);
 
   useEffect(() => {
+    if (!testimonialsLoading && testimonials) {
+      localStorage.setItem("rf_has_testimonials", String(testimonials.length > 0));
+    }
+  }, [testimonialsLoading, testimonials]);
+
+  const hasCache = cachedSchedule !== null && cachedTestimonials !== null;
+  const isNetworkLoading = scheduleLoading || testimonialsLoading;
+  const shouldBlockScreen = !hasCache && isNetworkLoading;
+
+
+  const showSchedule = !scheduleLoading
+    ? Boolean(scheduleEvents && scheduleEvents.length > 0)
+    : Boolean(cachedSchedule);
+
+  const showTestimonials = !testimonialsLoading
+    ? Boolean(testimonials && testimonials.length > 0)
+    : Boolean(cachedTestimonials);
+
+  useEffect(() => {
+    if (shouldBlockScreen) return;
+
     const handleScroll = () => {
       const sections = [
         "home",
@@ -87,15 +111,18 @@ export default function App() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [showSchedule, showTestimonials]);
+  }, [shouldBlockScreen, showSchedule, showTestimonials]);
+
+  if (shouldBlockScreen) {
+    return <div className="min-h-screen bg-[#0a0e1a]" />;
+  }
 
   return (
     <div className="relative min-h-screen bg-[#0a0e1a] text-[#f5f5f0] overflow-x-hidden">
-      {/* Menu lateral*/}
       <PianoNavigation
         showSchedule={showSchedule}
         showTestimonials={showTestimonials}
-        isLoading={isLoading}
+        isLoading={false}
         agenda={scheduleEvents}
         depoimentos={testimonials}
       />
@@ -106,7 +133,6 @@ export default function App() {
         <PortfolioSection />
         <MediaSection />
 
-        {/* Agenda*/}
         {showSchedule && (
           <ScheduleSection
             events={scheduleEvents}
@@ -115,7 +141,6 @@ export default function App() {
           />
         )}
 
-        {/* Depoimentos*/}
         {showTestimonials && (
           <TestimonialsSection
             testimonials={testimonials}

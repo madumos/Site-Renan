@@ -82,12 +82,12 @@ export function PortfolioSection() {
                       <div className="flex flex-wrap items-center gap-3 mb-2">
 
                         {/* Título*/}
-                        <h4
+                        <h3
                           className="text-2xl md:text-3xl text-white group-hover:text-[#3a5a7a] transition-colors"
                           style={{ fontFamily: "var(--font-serif)" }}
                         >
                           {project.show}
-                        </h4>
+                        </h3>
 
                         {/* Gênero Musical — só renderiza se "genre" estiver preenchido */}
                         {project.genre?.trim() && (

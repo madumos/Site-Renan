@@ -1,23 +1,12 @@
 import { useState, useEffect } from "react";
 import Papa from "papaparse";
 
-/**
- * Estado retornado pelo hook useCsvData.
- */
 export interface CsvState<T> {
   data: T[];
   loading: boolean;
   error: string | null;
 }
 
-/**
- * Hook genérico para buscar e parsear dados de um CSV público (Google Sheets).
- *
- * @param url   - Link CSV gerado pelo "Publicar na web" do Google Sheets.
- *                Veja src/config/csvUrls.ts para configurar os links.
- * @param validate - Função opcional para filtrar/validar cada linha parseada.
- *                   Retorne `true` para manter, `false` para descartar.
- */
 export function useCsvData<T extends object>(
   url: string,
   validate?: (row: T) => boolean
@@ -29,32 +18,27 @@ export function useCsvData<T extends object>(
   });
 
   useEffect(() => {
-    // Guarda referência para evitar atualizações em componente desmontado
     let cancelled = false;
 
-    // Não faz requisição se o link ainda é placeholder
-    if (!url || url.startsWith("COLE_AQUI")) {
-      setState({ data: [], loading: false, error: "URL do CSV não configurada." });
-      return;
-    }
+    if (!url) return;
 
     setState({ data: [], loading: true, error: null });
 
+    const separator = url.includes("?") ? "&" : "?";
+    const fetchUrl = `${url}${separator}_t=${Date.now()}`;
+
     try {
-      Papa.parse<T>(url, {
+      Papa.parse<T>(fetchUrl, {
         download: true,
-        header: true,         // Usa a primeira linha como chave dos objetos
-        skipEmptyLines: true, // Remove linhas completamente vazias
+        header: true,
+        skipEmptyLines: true,
         complete: (results) => {
           if (cancelled) return;
 
-          // Filtra linhas malformatadas ou inválidas
-          let parsed = results.data.filter((row) => {
-            // Remove linhas onde todos os valores são strings vazias
-            return Object.values(row).some((v) => String(v).trim() !== "");
-          });
+          let parsed = results.data.filter((row) =>
+            Object.values(row).some((v) => String(v).trim() !== "")
+          );
 
-          // Aplica validação customizada, se fornecida
           if (validate) {
             parsed = parsed.filter(validate);
           }
@@ -85,7 +69,7 @@ export function useCsvData<T extends object>(
     return () => {
       cancelled = true;
     };
-  }, [url]); // Re-executa apenas se a URL mudar
+  }, [url]);
 
   return state;
 }
