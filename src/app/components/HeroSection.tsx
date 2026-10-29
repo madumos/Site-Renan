@@ -5,7 +5,7 @@ import heroImage from "./images/hero02.png";
 export function HeroSection() {
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Background image with overlay */}
+      {/* Imagem de Fundo */}
       <div className="absolute inset-0 z-0">
         <ImageWithFallback
           src="https://images.unsplash.com/photo-1624088798012-7eabdb19cf90?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920"
@@ -15,10 +15,10 @@ export function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0e1a]/90 via-[#0a0e1a]/70 to-[#0a0e1a]" />
       </div>
 
-      {/* Content */}
+      {/* Conteúdo */}
       <div className="relative z-10 px-4 md:px-8 max-w-7xl w-full">
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Left: Artist Photo */}
+          {/* Foto */}
           <motion.div
             className="relative order-2 md:order-1"
             initial={{ opacity: 0, x: -50 }}
@@ -26,7 +26,7 @@ export function HeroSection() {
             transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
           >
             <div className="relative aspect-[3/4] max-w-md mx-auto">
-              {/* Photo frame */}
+              {/* Moldura */}
               <div className="absolute inset-0 border-4 border-[#1a3d5c] rounded-lg -rotate-2 z-0" />
               <div className="relative overflow-hidden rounded-lg shadow-2xl rotate-1">
                 <ImageWithFallback
@@ -37,13 +37,13 @@ export function HeroSection() {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e1a]/60 via-transparent to-transparent" />
               </div>
 
-              {/* Decorative elements */}
+              {/* Elementos */}
               <div className="absolute -bottom-6 -right-6 w-40 h-40 border-2 border-[#2a4a6a] rounded-lg -z-10 rotate-6" />
               <div className="absolute -top-4 -left-4 w-24 h-24 bg-[#1a3d5c]/30 rounded-full -z-10 blur-xl" />
             </div>
           </motion.div>
 
-          {/* Right: Name and Title */}
+          {/* Nome e Subtítulo*/}
           <motion.div
             className="text-center md:text-left order-1 md:order-2 mt-24 md:mt-0"
             initial={{ opacity: 0, y: 30 }}
@@ -80,7 +80,7 @@ export function HeroSection() {
                 className="text-lg md:text-xl text-[#9ca3af] tracking-wide"
                 style={{ fontFamily: "var(--font-sans)" }}
               >
-                Jazz Instrumental · Bossa Nova · MPB
+                Jazz · Bossa Nova · MPB
               </p>
             </motion.div>
           </motion.div>

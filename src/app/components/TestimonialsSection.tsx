@@ -3,24 +3,14 @@ import { Quote } from "lucide-react";
 import { useCsvData } from "../../hooks/useCsvData";
 import { CSV_URLS } from "../../config/csvUrls";
 
-// ============================================================
-// INTERFACE — Colunas da aba "Depoimentos" na planilha Google Sheets
-//
-//   text   | Texto do depoimento (sem aspas — o componente adiciona)
-//   author | Nome completo do autor
-//   role   | Cargo ou profissão (ex: "Cantora e Compositora")
-// ============================================================
 export interface DepoimentoRow {
   text: string;
   author: string;
   role: string;
 }
 
-// Hook exportado para que App.tsx possa verificar se há dados
-// sem fazer um fetch duplo. O hook usa o mesmo CSV_URLS.DEPOIMENTOS.
 export { useCsvData, CSV_URLS };
 
-// Skeleton de carregamento (usado internamente)
 function TestimonialsSkeleton() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -46,7 +36,6 @@ function TestimonialsSkeleton() {
 }
 
 interface TestimonialsSectionProps {
-  /** Dados já carregados pelo App.tsx — evita fetch duplo */
   testimonials: DepoimentoRow[];
   loading: boolean;
   error: string | null;
@@ -110,9 +99,6 @@ export function TestimonialsSection({ testimonials, loading, error }: Testimonia
                     {testimonial.role}
                   </div>
                 </div>
-
-                {/* Elemento decorativo */}
-                <div className="absolute bottom-4 right-4 w-20 h-20 border border-[#1a3d5c]/30 rounded-full -z-10 group-hover:scale-110 transition-transform" />
               </motion.div>
             ))}
           </div>

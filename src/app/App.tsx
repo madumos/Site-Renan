@@ -4,7 +4,10 @@ import { HeroSection } from "./components/HeroSection";
 import { AboutSection } from "./components/AboutSection";
 import { PortfolioSection } from "./components/PortfolioSection";
 import { MediaSection } from "./components/MediaSection";
-import { ScheduleSection } from "./components/ScheduleSection";
+import {
+  ScheduleSection,
+  type AgendaRow,
+} from "./components/ScheduleSection";
 import {
   TestimonialsSection,
   useCsvData,
@@ -14,15 +17,22 @@ import {
 import { ContactSection } from "./components/ContactSection";
 
 export default function App() {
-  // ─────────────────────────────────────────────────────────────────
-  // Fetch único dos depoimentos — resultado compartilhado entre
-  // TestimonialsSection e PianoNavigation (sem double-fetch).
-  //
-  // Regra de negócio:
-  //   • loading = true  → mostra skeleton na seção, tecla visível no menu
-  //   • loading = false, data vazio → oculta seção E tecla do menu
-  //   • loading = false, data preenchido → exibe seção e tecla normalmente
-  // ─────────────────────────────────────────────────────────────────
+  const {
+    data: scheduleEvents,
+    loading: scheduleLoading,
+    error: scheduleError,
+  } = useCsvData<AgendaRow>(
+    CSV_URLS.AGENDA,
+    (row) =>
+      typeof row.date === "string" &&
+      row.date.trim() !== "" &&
+      typeof row.title === "string" &&
+      row.title.trim() !== ""
+  );
+
+
+  const showSchedule = scheduleLoading || scheduleEvents.length > 0;
+
   const {
     data: testimonials,
     loading: testimonialsLoading,
@@ -36,14 +46,18 @@ export default function App() {
       row.author.trim() !== ""
   );
 
-  // A tecla "Depoimentos" aparece no menu enquanto carrega (evita salto de layout)
-  // e desaparece apenas quando confirmado que o CSV está vazio.
   const showTestimonials = testimonialsLoading || testimonials.length > 0;
 
   useEffect(() => {
     const handleScroll = () => {
       const sections = [
-        "home", "sobre", "portfolio", "midia", "agenda", "depoimentos", "contato",
+        "home",
+        "sobre",
+        "portfolio",
+        "midia",
+        ...(showSchedule ? ["agenda"] : []),
+        ...(showTestimonials ? ["depoimentos"] : []),
+        "contato",
       ];
       const scrollPosition = window.scrollY + window.innerHeight / 3;
 
@@ -63,21 +77,32 @@ export default function App() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [showSchedule, showTestimonials]);
 
   return (
     <div className="relative min-h-screen bg-[#0a0e1a] text-[#f5f5f0] overflow-x-hidden">
-      {/* Menu lateral — recebe flag de visibilidade dos depoimentos */}
-      <PianoNavigation showTestimonials={showTestimonials} />
+      {/* Menu lateral*/}
+      <PianoNavigation
+        showSchedule={showSchedule}
+        showTestimonials={showTestimonials}
+      />
 
       <main className="md:ml-64">
         <HeroSection />
         <AboutSection />
         <PortfolioSection />
         <MediaSection />
-        <ScheduleSection />
 
-        {/* Seção de depoimentos — só renderiza quando há dados OU enquanto carrega */}
+        {/* Agenda*/}
+        {showSchedule && (
+          <ScheduleSection
+            events={scheduleEvents}
+            loading={scheduleLoading}
+            error={scheduleError}
+          />
+        )}
+
+        {/* Depoimentos*/}
         {showTestimonials && (
           <TestimonialsSection
             testimonials={testimonials}

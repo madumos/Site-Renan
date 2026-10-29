@@ -8,16 +8,20 @@ interface PianoKey {
   hasBlackKeyBelow?: boolean;
 }
 
-// Teclas base (sem "Depoimentos" — ela é adicionada dinamicamente via prop)
+// Teclas base fixas
 const BASE_PIANO_KEYS: PianoKey[] = [
-  { id: "home",      label: "Home",      section: "home",      hasBlackKeyBelow: true  },
-  { id: "sobre",     label: "Sobre",     section: "sobre",     hasBlackKeyBelow: true  },
-  { id: "portfolio", label: "Portfólio", section: "portfolio",  hasBlackKeyBelow: true  },
-  { id: "midia",     label: "Mídia",     section: "midia",     hasBlackKeyBelow: false },
-  { id: "agenda",    label: "Agenda",    section: "agenda",    hasBlackKeyBelow: true  },
-  // "depoimentos" inserido condicionalmente via prop showTestimonials
-  { id: "contato",   label: "Contato",   section: "contato",   hasBlackKeyBelow: false },
+  { id: "home", label: "Home", section: "home", hasBlackKeyBelow: true },
+  { id: "sobre", label: "Sobre", section: "sobre", hasBlackKeyBelow: true },
+  { id: "portfolio", label: "Portfólio", section: "portfolio", hasBlackKeyBelow: true },
+  { id: "midia", label: "Mídia", section: "midia", hasBlackKeyBelow: false },
 ];
+
+const AGENDA_KEY: PianoKey = {
+  id: "agenda",
+  label: "Agenda",
+  section: "agenda",
+  hasBlackKeyBelow: true,
+};
 
 const TESTIMONIAL_KEY: PianoKey = {
   id: "depoimentos",
@@ -26,23 +30,35 @@ const TESTIMONIAL_KEY: PianoKey = {
   hasBlackKeyBelow: true,
 };
 
+const CONTACT_KEY: PianoKey = {
+  id: "contato",
+  label: "Contato",
+  section: "contato",
+  hasBlackKeyBelow: false,
+};
+
 interface PianoNavigationProps {
+  /** Controla se a tecla "Agenda" aparece no menu.
+   *  Passe `true` quando o CSV tiver dados, `false` quando estiver vazio. */
+  showSchedule?: boolean;
   /** Controla se a tecla "Depoimentos" aparece no menu.
    *  Passe `true` quando o CSV tiver dados, `false` quando estiver vazio. */
-  showTestimonials: boolean;
+  showTestimonials?: boolean;
 }
 
-export function PianoNavigation({ showTestimonials }: PianoNavigationProps) {
+export function PianoNavigation({
+  showSchedule = true,
+  showTestimonials = true,
+}: PianoNavigationProps) {
   const [activeKey, setActiveKey] = useState("home");
 
   // Monta a lista de teclas dinamicamente
-  const pianoKeys: PianoKey[] = showTestimonials
-    ? [
-        ...BASE_PIANO_KEYS.slice(0, 5), // home → agenda
-        TESTIMONIAL_KEY,
-        BASE_PIANO_KEYS[5],              // contato
-      ]
-    : BASE_PIANO_KEYS;
+  const pianoKeys: PianoKey[] = [
+    ...BASE_PIANO_KEYS,
+    ...(showSchedule ? [AGENDA_KEY] : []),
+    ...(showTestimonials ? [TESTIMONIAL_KEY] : []),
+    CONTACT_KEY,
+  ];
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -94,11 +110,10 @@ export function PianoNavigation({ showTestimonials }: PianoNavigationProps) {
 
               {/* Label */}
               <span
-                className={`absolute inset-0 flex items-center justify-center pr-4 transition-all duration-300 ${
-                  activeKey === key.id
-                    ? "text-[#1a3d5c]"
-                    : "text-[#4a4a48] group-hover:text-[#2a2a28]"
-                }`}
+                className={`absolute inset-0 flex items-center justify-center pr-4 transition-all duration-300 ${activeKey === key.id
+                  ? "text-[#1a3d5c]"
+                  : "text-[#4a4a48] group-hover:text-[#2a2a28]"
+                  }`}
                 style={{
                   fontFamily: "var(--font-serif)",
                   fontSize: "19px",
