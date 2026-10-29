@@ -59,7 +59,7 @@ export function TestimonialsSection({ testimonials, loading, error }: Testimonia
           Depoimentos
         </motion.h2>
 
-        {/* Estado de carregamento */}
+        {/* Estado de carregamento  */}
         {loading && <TestimonialsSkeleton />}
 
         {/* Estado de erro */}
