@@ -38,25 +38,41 @@ const CONTACT_KEY: PianoKey = {
 };
 
 interface PianoNavigationProps {
-  /** Controla se a tecla "Agenda" aparece no menu.
-   *  Passe `true` quando o CSV tiver dados, `false` quando estiver vazio. */
+  /** Controla se a Agenda e Depoimentos aparece no menu */
   showSchedule?: boolean;
-  /** Controla se a tecla "Depoimentos" aparece no menu.
-   *  Passe `true` quando o CSV tiver dados, `false` quando estiver vazio. */
   showTestimonials?: boolean;
+  isLoading?: boolean;
+  agenda?: unknown[];
+  depoimentos?: unknown[];
 }
 
 export function PianoNavigation({
-  showSchedule = true,
-  showTestimonials = true,
+  showSchedule,
+  showTestimonials,
+  isLoading = false,
+  agenda,
+  depoimentos,
 }: PianoNavigationProps) {
   const [activeKey, setActiveKey] = useState("home");
 
-  // Monta a lista de teclas dinamicamente
+  // Validação segura com Optional Chaining
+  const temAgenda = Boolean(!isLoading && agenda && agenda.length > 0);
+  const temDepoimentos = Boolean(!isLoading && depoimentos && depoimentos.length > 0);
+
+  // Se showSchedule/showTestimonials forem passados diretamente, respeita-os; senão usa a validação segura
+  const isScheduleVisible = showSchedule !== undefined ? showSchedule : temAgenda;
+  const isTestimonialsVisible = showTestimonials !== undefined ? showTestimonials : temDepoimentos;
+
+  console.log("DEBUG MENU:", { 
+    loading: isLoading, 
+    temAgenda: agenda?.length, 
+    temDepoimentos: depoimentos?.length 
+  });
+
   const pianoKeys: PianoKey[] = [
     ...BASE_PIANO_KEYS,
-    ...(showSchedule ? [AGENDA_KEY] : []),
-    ...(showTestimonials ? [TESTIMONIAL_KEY] : []),
+    ...(isScheduleVisible ? [AGENDA_KEY] : []),
+    ...(isTestimonialsVisible ? [TESTIMONIAL_KEY] : []),
     CONTACT_KEY,
   ];
 
@@ -70,7 +86,7 @@ export function PianoNavigation({
 
   return (
     <nav className="hidden md:flex fixed left-0 top-0 h-screen w-64 flex-col z-50">
-      {/* Piano container com borda externa ocupando 100% da altura (h-full) */}
+      {/* Ajuste de Altura */}
       <div
         className="flex flex-col w-full h-full relative"
         style={{
@@ -79,9 +95,9 @@ export function PianoNavigation({
         }}
       >
         {pianoKeys.map((key, index) => (
-          // O flex-1 garante que cada espaço de tecla cresça para preencher a tela
+
           <div key={key.id} className="relative flex-1 flex flex-col">
-            {/* Tecla Branca (clicável) */}
+            {/* Tecla Branca */}
             <motion.button
               onClick={() => scrollToSection(key.section)}
               className="w-full flex-1 h-full relative group overflow-hidden"
@@ -100,7 +116,6 @@ export function PianoNavigation({
               whileHover={{ x: 4 }}
               whileTap={{ scale: 0.99 }}
             >
-              {/* Reflexo de marfim */}
               <div
                 className="absolute inset-x-0 top-0 h-6 pointer-events-none"
                 style={{
@@ -108,7 +123,7 @@ export function PianoNavigation({
                 }}
               />
 
-              {/* Label */}
+              {/* Texto */}
               <span
                 className={`absolute inset-0 flex items-center justify-center pr-4 transition-all duration-300 ${activeKey === key.id
                   ? "text-[#1a3d5c]"
@@ -125,7 +140,7 @@ export function PianoNavigation({
                 {key.label}
               </span>
 
-              {/* Indicador ativo */}
+              {/* Indicador*/}
               {activeKey === key.id && (
                 <motion.div
                   className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-12 rounded-l-full"
@@ -139,7 +154,7 @@ export function PianoNavigation({
               )}
             </motion.button>
 
-            {/* Tecla Preta (sobreposta ENTRE as teclas brancas) */}
+            {/* Tecla Preta*/}
             {key.hasBlackKeyBelow && (
               <motion.div
                 className="absolute left-0 bottom-0 translate-y-1/2 w-[35%] h-12 pointer-events-none z-10"
@@ -152,7 +167,6 @@ export function PianoNavigation({
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.06 + 0.15, duration: 0.5 }}
               >
-                {/* Reflexo de ébano */}
                 <div
                   className="absolute top-1 right-1 bottom-1 w-1"
                   style={{

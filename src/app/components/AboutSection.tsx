@@ -9,7 +9,6 @@ interface SobraRow {
   biography: string;
 }
 
-// Skeleton de carregamento para a biography
 function BiographySkeleton() {
   return (
     <div className="space-y-4 animate-pulse">
@@ -32,7 +31,6 @@ export function AboutSection() {
     (row) => typeof row.biography === "string" && row.biography.trim() !== ""
   );
 
-  // Junta todos os parágrafos da coluna biography em ordem
   const paragraphs = data.map((row) => row.biography.trim()).filter(Boolean);
 
   return (
@@ -92,7 +90,7 @@ export function AboutSection() {
                 </p>
               )}
 
-              {/* Parágrafos da biography — cada linha do CSV vira um <p> */}
+              {/* Biografia */}
               {!loading && !error && paragraphs.length > 0 &&
                 paragraphs.map((paragraph, index) => (
                   <p
@@ -104,7 +102,6 @@ export function AboutSection() {
                 ))
               }
 
-              {/* Fallback: CSV configurado mas sem dados */}
               {!loading && !error && paragraphs.length === 0 && (
                 <p className="text-sm text-[#9ca3af] italic">
                   Nenhum texto encontrado no CSV.

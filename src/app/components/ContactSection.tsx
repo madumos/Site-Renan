@@ -67,7 +67,7 @@ export function ContactSection() {
         </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
-          {/* Contact Info */}
+          {/* Informações de Contato */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -82,7 +82,7 @@ export function ContactSection() {
               Preencha o formulário ou entre em contato diretamente.
             </p>
 
-            {/* Contact details */}
+            {/* Email */}
             <div className="space-y-6 mb-12">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-full bg-[#1a3d5c] flex items-center justify-center flex-shrink-0">
@@ -94,9 +94,7 @@ export function ContactSection() {
                 </div>
               </div>
 
-
-
-              {/* Social media */}
+              {/* Redes Sociais*/}
               <div>
                 <h4 className="text-xl mb-4" style={{ fontFamily: "var(--font-serif)" }}>
                   Redes Sociais
@@ -117,7 +115,7 @@ export function ContactSection() {
             </div>
           </motion.div>
 
-          {/* Contact Form */}
+          {/* Formulário */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -259,9 +257,9 @@ export function ContactSection() {
           </motion.div>
         </div>
 
-        {/* Footer */}
+        {/* Rodapé */}
         <motion.div
-          className="mt-24 pt-12 border-t border-white/10 text-center text-[#9ca3af]"
+          className="mt-24 pt-12 border-t border-white/10 text-center text-[#9ca3af] flex flex-col items-center justify-center gap-2 text-xs md:text-sm"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -269,6 +267,17 @@ export function ContactSection() {
         >
           <p style={{ fontFamily: "var(--font-sans)" }}>
             © 2026 Renan Francioni. Todos os direitos reservados.
+          </p>
+
+          <p style={{ fontFamily: "var(--font-sans)" }} className="text-[#6b7280]">
+            Design &amp; Desenvolvimento por{" "}
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#9ca3af] hover:text-white transition-colors duration-200 underline-offset-4 hover:underline"
+            >
+              Madumos Estúdio
+            </a>
           </p>
         </motion.div>
       </div >

@@ -23,15 +23,19 @@ export default function App() {
     error: scheduleError,
   } = useCsvData<AgendaRow>(
     CSV_URLS.AGENDA,
-    (row) =>
-      typeof row.date === "string" &&
-      row.date.trim() !== "" &&
-      typeof row.title === "string" &&
-      row.title.trim() !== ""
+    (row: any) => {
+      const date = row.date ?? row.Date ?? row.data ?? row.Data;
+      const title = row.title ?? row.Title ?? row.titulo ?? row.Titulo;
+      return (
+        typeof date === "string" &&
+        date.trim() !== "" &&
+        typeof title === "string" &&
+        title.trim() !== ""
+      );
+    }
   );
 
-
-  const showSchedule = scheduleLoading || scheduleEvents.length > 0;
+  const showSchedule = !scheduleLoading && Boolean(scheduleEvents && scheduleEvents.length > 0);
 
   const {
     data: testimonials,
@@ -39,14 +43,20 @@ export default function App() {
     error: testimonialsError,
   } = useCsvData<DepoimentoRow>(
     CSV_URLS.DEPOIMENTOS,
-    (row) =>
-      typeof row.text === "string" &&
-      row.text.trim() !== "" &&
-      typeof row.author === "string" &&
-      row.author.trim() !== ""
+    (row: any) => {
+      const text = row.text ?? row.Text ?? row.depoimento ?? row.Depoimento ?? row.texto ?? row.Texto;
+      const author = row.author ?? row.Author ?? row.autor ?? row.Autor ?? row.nome ?? row.Nome;
+      return (
+        typeof text === "string" &&
+        text.trim() !== "" &&
+        typeof author === "string" &&
+        author.trim() !== ""
+      );
+    }
   );
 
-  const showTestimonials = testimonialsLoading || testimonials.length > 0;
+  const showTestimonials = !testimonialsLoading && Boolean(testimonials && testimonials.length > 0);
+  const isLoading = scheduleLoading || testimonialsLoading;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -85,6 +95,9 @@ export default function App() {
       <PianoNavigation
         showSchedule={showSchedule}
         showTestimonials={showTestimonials}
+        isLoading={isLoading}
+        agenda={scheduleEvents}
+        depoimentos={testimonials}
       />
 
       <main className="md:ml-64">

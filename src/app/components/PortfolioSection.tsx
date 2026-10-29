@@ -75,13 +75,13 @@ export function PortfolioSection() {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1, duration: 0.5 }}
                 >
-                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 p-6 bg-[#141824] border border-white/10 rounded-lg hover:border-[#1a3d5c] transition-all duration-300 cursor-pointer group-hover:translate-x-2">
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 p-6 bg-[#141824] border border-white/10 rounded-lg hover:border-[#1a3d5c] transition-all duration-300 cursor-default group-hover:translate-x-2">
 
-                    {/* Lado Esquerdo: show (título) + genre (badge) + album (subtítulo) */}
+                    {/* Lado Esquerdo */}
                     <div className="flex-1 min-w-[280px]">
                       <div className="flex flex-wrap items-center gap-3 mb-2">
 
-                        {/* Título principal — coluna "show" da planilha */}
+                        {/* Título*/}
                         <h4
                           className="text-2xl md:text-3xl text-white group-hover:text-[#3a5a7a] transition-colors"
                           style={{ fontFamily: "var(--font-serif)" }}
@@ -89,7 +89,7 @@ export function PortfolioSection() {
                           {project.show}
                         </h4>
 
-                        {/* Badge de gênero — só renderiza se "genre" estiver preenchido */}
+                        {/* Gênero Musical — só renderiza se "genre" estiver preenchido */}
                         {project.genre?.trim() && (
                           <span
                             className="inline-flex items-center text-xs px-2.5 py-0.5 rounded-full bg-[#1a3d5c]/25 text-[#7aa2c7] border border-[#1a3d5c]/40 font-medium"
@@ -100,7 +100,7 @@ export function PortfolioSection() {
                         )}
                       </div>
 
-                      {/* Subtítulo em itálico — só renderiza se "album" estiver preenchido */}
+                      {/* Álbum — só renderiza se "album" estiver preenchido */}
                       {project.album?.trim() && (
                         <p
                           className="text-sm md:text-base text-[#9ca3af] italic"
@@ -111,7 +111,7 @@ export function PortfolioSection() {
                       )}
                     </div>
 
-                    {/* Lado Direito: role com ícone de música */}
+                    {/* Lado Direito */}
                     <div className="flex items-center justify-between md:justify-end gap-6 md:shrink-0 pt-3 md:pt-0 border-t border-white/5 md:border-t-0">
                       <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-md bg-white/[0.03] border border-white/5">
                         <Music2 className="w-4 h-4 text-[#3a5a7a] shrink-0" />
