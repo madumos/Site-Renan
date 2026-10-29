@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import heroImage from "./images/hero02.png";
+import heroImage from "./images/hero.webp";
+import backgroundImage from "./images/background_hero.webp";
 
 export function HeroSection() {
   return (
@@ -8,7 +9,7 @@ export function HeroSection() {
       {/* Imagem de Fundo */}
       <div className="absolute inset-0 z-0">
         <ImageWithFallback
-          src="https://images.unsplash.com/photo-1624088798012-7eabdb19cf90?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920"
+          src={backgroundImage}
           alt="Grand Piano"
           className="w-full h-full object-cover opacity-20"
         />
@@ -31,7 +32,7 @@ export function HeroSection() {
               <div className="relative overflow-hidden rounded-lg shadow-2xl rotate-1">
                 <ImageWithFallback
                   src={heroImage}
-                  alt="Renan Francioni"
+                  alt="Renan Francioni tocando teclado em show ao vivo no palco"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e1a]/60 via-transparent to-transparent" />
@@ -74,7 +75,7 @@ export function HeroSection() {
                 className="text-xl md:text-2xl text-[#f5f5f0] tracking-wide leading-relaxed"
                 style={{ fontFamily: "var(--font-sans)" }}
               >
-                Pianista
+                Pianista, Arranjador e Compositor
               </p>
               <p
                 className="text-lg md:text-xl text-[#9ca3af] tracking-wide"

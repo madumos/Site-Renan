@@ -1,18 +1,19 @@
+import { useState } from "react";
 import { motion } from "motion/react";
-import { Youtube, Music } from "lucide-react";
+import { Youtube, Music, Play } from "lucide-react";
 
 const videos = [
   {
     id: "n0ssdt-K2l8",
-    title: "Vídeo 1 do YouTube",
+    title: "Renan Francioni - Apresentação ao Vivo no Piano",
   },
   {
     id: "zYY_GDcYuMw",
-    title: "Vídeo 2 do YouTube",
+    title: "Renan Francioni - Arranjo e Execução Musical",
   },
   {
     id: "yT4WC_mBd5I",
-    title: "Vídeo 3 do YouTube",
+    title: "Renan Francioni - Concerto e Repertório Instrumental",
   },
 ];
 
@@ -21,7 +22,51 @@ const streamingPlatforms = [
   { name: "YouTube", icon: Youtube, color: "#FF0000", url: "https://www.youtube.com/@renanfrancioni652" },
 ];
 
+// Subcomponente de fachada para o YouTube (poupa ~3 MB de scripts iniciais)
+function YouTubePlayer({ videoId, title }: { videoId: string; title: string }) {
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  if (isPlaying) {
+    return (
+      <iframe
+        src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
+        title={title}
+        className="w-full h-full border-0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerPolicy="strict-origin-when-cross-origin"
+        allowFullScreen
+      />
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={() => setIsPlaying(true)}
+      className="w-full h-full relative block cursor-pointer group focus:outline-none"
+      aria-label={`Reproduzir vídeo: ${title}`}
+    >
+      <img
+        src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
+        alt={title}
+        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+        loading="lazy"
+        width={480}
+        height={360}
+      />
+      {/* Botão de play central */}
+      <div className="absolute inset-0 flex items-center justify-center bg-black/30 transition-colors group-hover:bg-black/15">
+        <div className="w-16 h-16 rounded-full bg-red-600/90 group-hover:bg-red-600 flex items-center justify-center shadow-lg transition-transform group-hover:scale-110">
+          <Play className="w-7 h-7 text-white fill-white ml-1" />
+        </div>
+      </div>
+    </button>
+  );
+}
+
 export function MediaSection() {
+  const [loadSpotify, setLoadSpotify] = useState(false);
+
   return (
     <section id="midia" className="min-h-screen py-12 px-4 md:py-32 md:px-16 relative">
       <div className="max-w-6xl mx-auto">
@@ -36,7 +81,7 @@ export function MediaSection() {
           Mídia
         </motion.h2>
 
-        {/* Vídeos*/}
+        {/* Vídeos do YouTube com fachadas estáticas */}
         <motion.div
           className="mb-16"
           initial={{ opacity: 0, y: 30 }}
@@ -44,7 +89,6 @@ export function MediaSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
             {videos.map((video, index) => (
               <motion.div
@@ -56,43 +100,44 @@ export function MediaSection() {
                 transition={{ delay: index * 0.1, duration: 0.5 }}
                 whileHover={{ y: -8 }}
               >
-                <div className="aspect-video overflow-hidden rounded-lg">
-                  <iframe
-                    src={`https://www.youtube.com/embed/${video.id}`}
-                    title={video.title}
-                    className="w-full h-full"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                    loading="lazy"
-                  />
+                <div className="aspect-video overflow-hidden rounded-lg bg-black/40 border border-white/10">
+                  <YouTubePlayer videoId={video.id} title={video.title} />
                 </div>
               </motion.div>
             ))}
           </div>
         </motion.div>
 
-        {/* Spotify Embed */}
+        {/* Spotify Embed montado apenas quando a secção entra no ecrã */}
         <motion.div
           className="mb-32 max-w-6xl mx-auto"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "200px" }}
+          onViewportEnter={() => setLoadSpotify(true)}
           transition={{ duration: 0.8 }}
         >
-          <iframe
-            data-testid="embed-iframe"
-            style={{ borderRadius: "12px", border: 0 }}
-            src="https://open.spotify.com/embed/playlist/0N9t5juez4oNQDYl4MdR7H?utm_source=generator&si=3cc643aae57a49b5"
-            width="100%"
-            height="520"
-            allowFullScreen
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy"
-          />
+          {loadSpotify ? (
+            <iframe
+              title="Playlist oficial de Renan Francioni no Spotify"
+              data-testid="embed-iframe"
+              style={{ borderRadius: "12px", border: 0 }}
+              src="https://open.spotify.com/embed/playlist/0N9t5juez4oNQDYl4MdR7H?utm_source=generator&si=3cc643aae57a49b5"
+              width="100%"
+              height="520"
+              allowFullScreen
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+            />
+          ) : (
+            <div
+              style={{ height: "520px", borderRadius: "12px" }}
+              className="w-full bg-[#141824]/40 border border-white/5 animate-pulse"
+            />
+          )}
         </motion.div>
 
-        {/* Plataformas de Streaming*/}
+        {/* Plataformas de Streaming */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

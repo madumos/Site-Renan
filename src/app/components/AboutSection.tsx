@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import aboutImage from "./images/about.jpg";
+import aboutImage from "./images/about.webp";
 import { useCsvData } from "../../hooks/useCsvData";
 import { CSV_URLS } from "../../config/csvUrls";
 
@@ -64,7 +64,7 @@ export function AboutSection() {
               <div className="relative aspect-[3/4] overflow-hidden rounded-lg">
                 <ImageWithFallback
                   src={aboutImage}
-                  alt="Renan Francioni ao piano"
+                  alt="Pianista e tecladista Renan Francioni acompanhando banda de jazz e sopros em concerto"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e1a] via-transparent to-transparent" />
