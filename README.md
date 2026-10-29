@@ -27,9 +27,9 @@ Principais pilares do projeto:
 
 Como parte da entrega final, foram elaborados materiais de apoio para garantir a manutenção da integridade visual e a total autonomia do cliente na gestão do conteúdo:
 
-* [**Manual de Identidade Visual**](./docs/Renan_Francioni_-_Manual_de_Identidade_Visual.pdf): Diretrizes de UI/UX, tipografia, paleta de cores aplicados no desenvolvimento.
+* [**Manual de Identidade Visual**](./docs/Renan Francioni - Manual de Identidade Visual.pdf): Diretrizes de UI/UX, tipografia, paleta de cores aplicados no desenvolvimento.
 
-* [**Guia de Utilização do CMS**](./docs/Renan_Francioni_-_Guia_de_Utilizacao_do_Site.pdf): Documentação elaborada para o cliente, com o passo a passo de como gerenciar o conteúdo do site diretamente pelo Google Sheets.
+* [**Guia de Utilização do CMS**](./docs/Renan Francioni - Guia de Utilização do Site.pdf): Documentação elaborada para o cliente, com o passo a passo de como gerenciar o conteúdo do site diretamente pelo Google Sheets.
 
 
 ## Arquitetura 
