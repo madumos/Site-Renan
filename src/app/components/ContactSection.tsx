@@ -104,11 +104,13 @@ export function ContactSection() {
                     href="https://www.instagram.com/francionirenan/"
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label="Instagram de Renan Francioni"
                     className="w-12 h-12 rounded-full bg-[#141824] border border-white/10 flex items-center justify-center hover:bg-[#1a3d5c] hover:border-[#1a3d5c] transition-all"
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     whileTap={{ scale: 0.9 }}
                   >
-                    <Instagram className="w-5 h-5" />
+                    <span className="sr-only">Instagram de Renan Francioni</span>
+                    <Instagram className="w-5 h-5" aria-hidden="true" />
                   </motion.a>
                 </div>
               </div>
